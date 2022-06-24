@@ -3,7 +3,7 @@ from aiogram.types import ParseMode, InlineKeyboardMarkup, InlineKeyboardButton
 from config import bot
 from database.bot_db import sql_command_random
 from keyboards.client_kb import start_markup
-
+from parser import news
 
 # @dp.message_handler(commands=['start'])
 async def start_command(message: types.Message):
@@ -36,8 +36,14 @@ async def quiz_1(message: types.Message):
 async def show_random_user(message: types.Message):
     await sql_command_random(message)
 
+async def parser_anime(message: types.Message):
+    data = news.parser()
+    for anime in data:
+        await bot.send_message(message.from_user.id,
+                               f"{anime['title']}\n\n{anime['link']}")
 
 def register_handler_client(dp: Dispatcher):
     dp.register_message_handler(start_command, commands=['start'])
     dp.register_message_handler(quiz_1, commands=['quiz'])
     dp.register_message_handler(show_random_user, commands=['random'])
+    dp.register_message_handler(parser_anime, commands=['anime'])
