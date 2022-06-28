@@ -39,7 +39,7 @@ async def inline_wiki_handler(query: types.InlineQuery):
             )
         )
     ]
-
+    await query.answer(articles, cache_time=2, is_personal=True)
 
 def register_handler_inline(dp: Dispatcher):
     # dp.register_inline_handler(inline_youtube_handler)
