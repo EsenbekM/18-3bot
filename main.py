@@ -1,7 +1,8 @@
 import asyncio
 
 from aiogram.utils import executor
-from handlers import client, callback, extra, admin, fsm_anketa, notification
+from handlers import client, callback, extra, admin, \
+    fsm_anketa, notification, inline
 
 from config import dp
 import logging
@@ -16,6 +17,7 @@ client.register_handler_client(dp)
 callback.register_handlers_callback(dp)
 admin.register_handler_admin(dp)
 fsm_anketa.register_handler_fsmanketa(dp)
+inline.register_handler_inline(dp)
 notification.register_handler_notification(dp)
 
 extra.register_handlers_extra(dp)
